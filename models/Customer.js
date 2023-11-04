@@ -5,12 +5,7 @@ const CustomerSchema =new mongoose.Schema( {
     type:String,
     unique:true
 
-  },
-  phone:{
-    type:Number,
-    required:true
-  },
-  password: String,
+  }
 });
 
 module.exports = mongoose.model('Customer', CustomerSchema);
