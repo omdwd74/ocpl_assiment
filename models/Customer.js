@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const CustomerSchema = mongoose.model('User', {
+const CustomerSchema =new mongoose.Schema( {
   email:{
     type:String,
     unique:true
