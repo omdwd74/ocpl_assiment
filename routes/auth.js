@@ -2,6 +2,8 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const User = require('../models/Customer');
+const authenticateToken = require('../middleware'); // Import the middleware
+
 const bcrypt = require('bcrypt');
 const secretKey = process.env.JWT_SECRET; 
 
@@ -40,17 +42,6 @@ router.post('/login', async (req, res) => {
   const token = jwt.sign({ email }, secretKey);
   res.json({ token });
 });
-// // Middleware for JWT authentication
-const authenticateToken = (req, res, next) => {
-  const token = req.header('Authorization');
-  if (!token) return res.status(401).json({ error: 'Access denied' });
-
-  jwt.verify(token, secretKey, (err, user) => {
-    if (err) return res.status(403).json({ error: 'Invalid token' });
-    req.user = user;
-    next();
-  });
-};
 router.post('/api/resource', authenticateToken, (req, res) => {
   res.json({ message: 'This is a protected route', user: req.user });
 });
