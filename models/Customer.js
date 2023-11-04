@@ -5,6 +5,15 @@ const CustomerSchema =new mongoose.Schema( {
     type:String,
     unique:true
 
+  },
+  
+  phone: {
+    type: Number,
+    required: true
+  },
+  password: {
+    type: String,
+    required: true
   }
 });
 
